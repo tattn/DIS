@@ -13,6 +13,8 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torchvision.transforms.functional import normalize
 
+import cv2
+
 from models import *
 
 
@@ -50,4 +52,4 @@ if __name__ == "__main__":
             mi = torch.min(result)
             result = (result-mi)/(ma-mi)
             im_name=im_path.split('/')[-1].split('.')[0]
-            io.imsave(os.path.join(result_path,im_name+".png"),(result*255).permute(1,2,0).cpu().data.numpy().astype(np.uint8))
+            cv2.imwrite(os.path.join(result_path,im_name+".png"),(result*255).permute(1,2,0).cpu().data.numpy().astype(np.uint8))
